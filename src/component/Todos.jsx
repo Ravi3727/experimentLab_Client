@@ -6,7 +6,7 @@ function Todos({dated,task}) {
     <>
       <div className='mt-3'>
         <div>
-          <UpcomingEvents dated={dated} task={task} />
+          <UpcomingEvents dated={dated} task={task}/>
         </div>
       </div>
     </>
