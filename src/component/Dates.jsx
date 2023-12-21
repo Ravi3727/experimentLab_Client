@@ -7,6 +7,7 @@ import Todos from "./Todos"
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from "./spinner";
 
 
 export default function Dates() {
@@ -16,6 +17,7 @@ export default function Dates() {
   const [selectDate, setSelectDate] = useState(currentDate);
   const [Task, setTask] = useState('');
   const [dated, setDate] = useState();
+  const [loader, setLoader] = useState(false);
   const [email, setEmail] = useState('');
   const [tasks, setTasks] = useState([]);
 
@@ -26,9 +28,10 @@ export default function Dates() {
       const emailToSend = email.length > 0 ? email : "rk3727000@gmail.com";
 
       if (Task && dated) {
+        setLoader(true);
         const dataToSend = { dated, Task, email: emailToSend };
-        await Axios.post('https://todo-server-vp9b.onrender.com/ravi/v1/createtask', dataToSend);
-
+         await Axios.post('https://todo-server-vp9b.onrender.com/ravi/v1/createtask', dataToSend);
+        setLoader(false);
         setTasks((prevTasks) => [
           ...prevTasks,
           { id: Date.now(), Task, dated },
@@ -147,17 +150,22 @@ export default function Dates() {
 
         <div className="h-[2px] bg-gray-300 mt-4 lg:w-[410px] w-full "></div>
 
+        {loader && <div className="items-center justify-center flex lg:ml-[80px] mr-12     lg:mr-0">
+            <Spinner />
+          </div>
+        }
+
         <form method="POST" onSubmit={addEntry}>
           <h1 className=" taxt-lg lg:text-xl font-bold text-black leading-1.1 select-none mb-2 mt-2">Upcoming Events</h1>
           <h1 className="text-sm font-bold text-gray-700 lg:ml-1 leading-1.1 select-none">
             {`Schedule for ${selectDate.toDate().toDateString()} `}
           </h1>
 
-          <textarea value={Task} onChange={(e) => setTask(e.target.value)} id="task" rows="4" className="mt-1 block p-2.5 w-[280px] lg:w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-100" placeholder="Set a Reminder..."></textarea>
+          <textarea value={Task} onChange={(e) => setTask(e.target.value)} id="task" rows="4" className="mt-1 block p-2.5 w-[280px] lg:w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-100" placeholder="Set a Reminder..."  style={{ backgroundColor: loader ?'rgb(200,200,200)':'', color :loader?'rgb(0,0,0)':''}}></textarea>
 
           <div className="mt-2 flex flex-col w-[210px] lg:w-full">
             <label htmlFor="email" className="text-md font-semibold leading-1.2 border-solid border-black">Enter Email </label>
-            <input type="email" placeholder="abc@xyz.com" value={email} onChange={(e) => setEmail(e.target.value)} className="p-1 rounded-lg border-1 mt-1 mb-1" />
+            <input type="email" placeholder="abc@xyz.com" value={email} onChange={(e) => setEmail(e.target.value)} className="p-1 rounded-lg border-1 mt-1 mb-1" style={{ backgroundColor: loader ?'rgb(200,200,200)':'', color :loader?'rgb(0,0,0)':''}} />
 
           </div>
 
@@ -172,7 +180,7 @@ export default function Dates() {
         <div className="flex flex-wrap gap-3">
           {
             tasks.map((TaskItem, index) => (
-              <Todos task={TaskItem.Task} dated={TaskItem.dated} key = {index} />
+              <Todos task={TaskItem.Task} dated={TaskItem.dated} key={index} />
             ))
           }
         </div>
