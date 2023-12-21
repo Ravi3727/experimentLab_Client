@@ -7,7 +7,7 @@ import Todos from "./Todos"
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from "./spinner";
+import Spin from "./Spin";
 
 
 export default function Dates() {
@@ -151,7 +151,7 @@ export default function Dates() {
         <div className="h-[2px] bg-gray-300 mt-4 lg:w-[410px] w-full "></div>
 
         {loader && <div className="items-center justify-center flex lg:ml-[80px] mr-12     lg:mr-0">
-            <Spinner />
+            <Spin />
           </div>
         }
 

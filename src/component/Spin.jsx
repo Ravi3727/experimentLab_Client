@@ -1,7 +1,7 @@
 import React from 'react'
 import {ColorRing} from 'react-loader-spinner';
 
-function Spinner() {
+function Spin() {
     return(<ColorRing
         visible={true}
         height="80"
@@ -13,4 +13,4 @@ function Spinner() {
     />)
 }
 
-export default Spinner;
+export default Spin;
