@@ -3,71 +3,18 @@ import React, { useState } from "react";
 import { generateDate, months } from "./Calendar";
 import cn from "./cn";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import Todos from "./Todos"
-import Axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Spin from "./Spin";
-
+import AddEvents from "./AddEvents";
 
 export default function Dates() {
   const days = ["S", "M", "T", "W", "T", "F", "S"];
   const currentDate = dayjs();
   const [today, setToday] = useState(currentDate);
   const [selectDate, setSelectDate] = useState(currentDate);
-  const [Task, setTask] = useState('');
   const [dated, setDate] = useState();
-  const [loader, setLoader] = useState(false);
-  const [email, setEmail] = useState('');
-  const [tasks, setTasks] = useState([]);
-
-  const addEntry = async (e) => {
-    e.preventDefault();
-
-    try {
-      const emailToSend = email.length > 0 ? email : "rk3727000@gmail.com";
-
-      if (Task && dated) {
-        setLoader(true);
-        const dataToSend = { dated, Task, email: emailToSend };
-         await Axios.post('https://todo-server-vp9b.onrender.com/ravi/v1/createtask', dataToSend);
-        setLoader(false);
-        setTasks((prevTasks) => [
-          ...prevTasks,
-          { id: Date.now(), Task, dated },
-        ]);
-
-        toast.success("Task Created Successfully", {
-          position: "top-center",
-        });
-
-        setEmail('');
-        setTask('');
-      } else {
-        toast.error('Please Fill All Fields', {
-          position: 'top-center',
-        });
-      }
-    } catch (error) {
-      // Handle specific Axios errors if needed
-      if (error.response) {
-        console.error('Error response:', error.response.data);
-      } else if (error.request) {
-        console.error('No response received:', error.request);
-      } else {
-        console.error('Error setting up the request:', error.message);
-      }
-      console.error(error);
-    }
-  };
-
-
-
-
   return (
 
-    <div className="flex flex-col gap-10 p-4 overflow-x-hidden">
-      <div className="w-full p-2">
+    <div className="flex md:flex-row flex-col  justify-between p-2 md:p-4 overflow-x-hidden w-full md:w-11/12 mx-auto min-h-screen overflow-y-auto">
+      <div className="max-w-10/12 border-1 h-full bg-blue-400 rounded-xl p-2 my-auto">
         <div className="flex justify-between items-center">
           <h1 className="select-none font-semibold">
             {months[today.month()]}, {today.year()}
@@ -144,51 +91,10 @@ export default function Dates() {
         </div>
       </div>
 
-
-
-      <div className="h-96 w-96 sm:px-5">
-
-        <div className="h-[2px] bg-gray-300 mt-4 lg:w-[410px] w-full "></div>
-
-        {loader && <div className="items-center justify-center flex lg:ml-[80px] mr-12     lg:mr-0">
-            <Spin />
-          </div>
-        }
-
-        <form method="POST" onSubmit={addEntry}>
-          <h1 className=" taxt-lg lg:text-xl font-bold text-black leading-1.1 select-none mb-2 mt-2">Upcoming Events</h1>
-          <h1 className="text-sm font-bold text-gray-700 lg:ml-1 leading-1.1 select-none">
-            {`Schedule for ${selectDate.toDate().toDateString()} `}
-          </h1>
-
-          <textarea value={Task} onChange={(e) => setTask(e.target.value)} id="task" rows="4" className="mt-1 block p-2.5 w-[280px] lg:w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 bg-gray-100" placeholder="Set a Reminder..."  style={{ backgroundColor: loader ?'rgb(200,200,200)':'', color :loader?'rgb(0,0,0)':''}}></textarea>
-
-          <div className="mt-2 flex flex-col w-[210px] lg:w-full">
-            <label htmlFor="email" className="text-md font-semibold leading-1.2 border-solid border-black">Enter Email </label>
-            <input type="email" placeholder="abc@xyz.com" value={email} onChange={(e) => setEmail(e.target.value)} className="p-1 rounded-lg border-1 mt-1 mb-1" style={{ backgroundColor: loader ?'rgb(200,200,200)':'', color :loader?'rgb(0,0,0)':''}} />
-
-          </div>
-
-          <div>
-            <button className="border-2 shadow-lg rounded-lg bg-green-300 p-1 mt-3 lg:ml-0 select-none border-solid border-black w-[210px] lg:w-full sm:mt-2 " type="submit" >
-              Add Task
-            </button>
-          </div>
-
-        </form>
-
-        <div className="flex flex-wrap gap-3">
-          {
-            tasks.map((TaskItem, index) => (
-              <Todos task={TaskItem.Task} dated={TaskItem.dated} key={index} />
-            ))
-          }
-        </div>
-
-
+      <div className="bg-blue-400 w-full mt-4 md:mt-0 md:w-7/12 rounded-xl md:p-2  max-h-screen ">
+        <AddEvents  selectDate={selectDate} />
       </div>
 
-      <ToastContainer />
     </div>
 
   );
