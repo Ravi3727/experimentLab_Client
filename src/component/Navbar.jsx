@@ -3,7 +3,7 @@ import axios from "axios";
 function Navbar() {
     const storedUser = localStorage.getItem("user");
     const user = storedUser ? storedUser : null;
-    const url = `http://localhost:3000/ravi/v1/users/logout`;
+    const url = `https://experimentlab-server-5.onrender.com/ravi/v1/users/logout`;
     const logoutUser = async () => {
         try {
             const Token1 = localStorage.getItem("accessToken");

@@ -20,7 +20,7 @@ function UpcomingEvents({ dated, title, desc, time, id, activetab, selectDate })
 
   const handleDelete = async () => {
     const userId = localStorage.getItem("user");  // Retrieve user ID from localStorage
-    const deleteUrl = `http://localhost:3000/ravi/v1/${activetab === 'allevents' ? 'events' : 'meetings'}/${id}?userId=${userId}`;
+    const deleteUrl = `https://experimentlab-server-5.onrender.com/ravi/v1/${activetab === 'allevents' ? 'events' : 'meetings'}/${id}?userId=${userId}`;
 
     try {
         setDLoader(true);
@@ -38,8 +38,8 @@ function UpcomingEvents({ dated, title, desc, time, id, activetab, selectDate })
     e.preventDefault();
 
     const addEventURL = activetab === 'allevents'
-      ? `http://localhost:3000/ravi/v1/events/${id}`  // Pass the event ID as a URL parameter
-      : `http://localhost:3000/ravi/v1/meetings/${id}`;
+      ? `https://experimentlab-server-5.onrender.com/ravi/v1/events/${id}`  // Pass the event ID as a URL parameter
+      : `https://experimentlab-server-5.onrender.com/ravi/v1/meetings/${id}`;
 
     try {
       const updatedDate = selectDate?.toDate()?.toDateString();

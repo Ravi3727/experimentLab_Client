@@ -22,7 +22,7 @@ function AddEvents({ selectDate }) {
     }
     
     const getUser = () => {
-        const url = `http://localhost:3000/ravi/v1/users`;
+        const url = `https://experimentlab-server-5.onrender.com/ravi/v1/users`;
     
         try {
             // Retrieve and parse the user object from localStorage

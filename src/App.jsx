@@ -11,12 +11,6 @@ import Navbar from './component/Navbar';
 export const AppContext = createContext();
 function App() {
   const [user, setUser] = useState();
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("user");
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  // }, []);
 
 
 
@@ -36,9 +30,6 @@ function App() {
     
       <div className=" border-1 w-full h-full border-black">
         <ErrorBoundary> 
-          {/* <div className=' w-full h-full mx-auto'>
-            <Dates />
-          </div> */}
         </ErrorBoundary>
       </div>
       </Router>
