@@ -21,11 +21,11 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
-          <Route exact path="/" element={< Dates/>} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/signin" element={<SignIn />} />
-          <Route exact path="/events" element={<AllEvents />} />
-          <Route exact path="/meetings" element={<AllMeetings />} />
+          <Route  path="/" element={< Dates/>} />
+          <Route  path="/signup" element={<SignUp />} />
+          <Route  path="/signin" element={<SignIn />} />
+          <Route  path="/events" element={<AllEvents />} />
+          <Route  path="/meetings" element={<AllMeetings />} />
         </Routes>
     
       <div className=" border-1 w-full h-full border-black">
