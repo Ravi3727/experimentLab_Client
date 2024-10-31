@@ -23,6 +23,7 @@ function RegisterForm() {
   };
 
   const url = "https://experimentlab-server-5.onrender.com/ravi/v1/users/register";
+  // const url = "http://localhost:3000/ravi/v1/users/register";
   const handleSubmit = async (e) => {
     e.preventDefault();
 

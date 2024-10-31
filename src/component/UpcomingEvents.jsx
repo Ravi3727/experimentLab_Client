@@ -36,10 +36,14 @@ function UpcomingEvents({ dated, title, desc, time, id, activetab, selectDate })
 
   const addEventEntry = async (e) => {
     e.preventDefault();
-
+    
     const addEventURL = activetab === 'allevents'
       ? `https://experimentlab-server-5.onrender.com/ravi/v1/events/${id}`  // Pass the event ID as a URL parameter
       : `https://experimentlab-server-5.onrender.com/ravi/v1/meetings/${id}`;
+
+    // const addEventURL = activetab === 'allevents'
+    // ? `http://localhost:3000/ravi/v1/events/${id}`  // Pass the event ID as a URL parameter
+    // : `http://localhost:3000/ravi/v1/meetings/${id}`;
 
     try {
       const updatedDate = selectDate?.toDate()?.toDateString();

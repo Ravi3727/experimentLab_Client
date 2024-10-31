@@ -23,6 +23,7 @@ function AddEvents({ selectDate }) {
     
     const getUser = () => {
         const url = `https://experimentlab-server-5.onrender.com/ravi/v1/users`;
+        // const url = `http://localhost:3000/ravi/v1/users`;
     
         try {
             // Retrieve and parse the user object from localStorage
@@ -72,8 +73,8 @@ function AddEvents({ selectDate }) {
         e.preventDefault();
     
         const addEventURL = eventType === 'events'
-            ? "http://localhost:3000/ravi/v1/events"
-            : "http://localhost:3000/ravi/v1/meetings";
+            ? "https://experimentlab-server-5.onrender.com/ravi/v1/events"
+            : "https://experimentlab-server-5.onrender.com/ravi/v1/meetings";
     
         try {
             const dated = selectDate.toDate().toDateString();
